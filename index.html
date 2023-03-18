@@ -8,4 +8,30 @@
     <h1>Barra de progreso</h1>
     <progress value="25" max="100"></progress>
   </body>
+
+<table id="tabla-datos"></table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $.get("datos.csv", function(data) {
+      const filas = data.split('\n');
+      const tabla = document.querySelector('#tabla-datos');
+      tabla.innerHTML = '';
+      filas.forEach((fila) => {
+        const celdas = fila.split(',');
+        const tr = document.createElement('tr');
+        const td1 = document.createElement('td');
+        const td2 = document.createElement('td');
+        td1.textContent = celdas[0];
+        td2.textContent = celdas[1];
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tabla.appendChild(tr);
+      });
+    });
+  });
+</script>
+
+
+
 </html>
