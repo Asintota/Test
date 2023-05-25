@@ -2,6 +2,11 @@
 <html>
 <head>
     <title>Dynamic Table Example</title>
+    <style>
+        td {
+            border: 1px solid black;
+        }
+    </style>
     <script>
         function createTable() {
             var data = [
@@ -12,7 +17,6 @@
             ];
 
             var table = document.createElement("table");
-            table.border = "1";
 
             var thead = document.createElement("thead");
             var headerRow = document.createElement("tr");
@@ -29,7 +33,10 @@
                 var tr = document.createElement("tr");
                 for (var key in row) {
                     var td = document.createElement("td");
-                    td.textContent = row[key];
+                    var input = document.createElement("input");
+                    input.type = "text";
+                    input.value = row[key];
+                    td.appendChild(input);
                     tr.appendChild(td);
                 }
                 tbody.appendChild(tr);
