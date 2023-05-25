@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Barra de progreso</title>
+    <title>Dynamic Table Example</title>
+    <script>
+        function createTable() {
+            var data = [
+                { name: "John", age: 25, city: "New York" },
+                { name: "Jane", age: 30, city: "London" },
+                { name: "Mark", age: 28, city: "Paris" },
+                { name: "Emily", age: 35, city: "Sydney" }
+            ];
+
+            var table = document.createElement("table");
+            table.border = "1";
+
+            var thead = document.createElement("thead");
+            var headerRow = document.createElement("tr");
+            for (var key in data[0]) {
+                var th = document.createElement("th");
+                th.textContent = key;
+                headerRow.appendChild(th);
+            }
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            var tbody = document.createElement("tbody");
+            data.forEach(function (row) {
+                var tr = document.createElement("tr");
+                for (var key in row) {
+                    var td = document.createElement("td");
+                    td.textContent = row[key];
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+
+            document.body.appendChild(table);
+        }
+    </script>
 </head>
-<body>
-  <h1>Barra de progreso</h1>
-  <progress id="barra" value="0" max="100"></progress>
-  <div id="valor"></div>
-  
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $.get("datos.csv", function(data) {
-        const filas = data.split('\n');
-        const valores1 = [];
-        const valores2 = [];
-        filas.forEach((fila) => {
-          const celdas = fila.split(',');
-          valores1.push(celdas[0]);
-          valores2.push(celdas[1]);
-        });
-        const barra = document.querySelector('#barra');
-        const valor = document.querySelector('#valor');
-        barra.value = valores1[1];
-        barra.max = valores2[1];
-        valor.textContent = `Valor actual: ${valores1[1]}`;
-      });
-    });
-  </script>
+<body onload="createTable()">
 </body>
 </html>
-
-
